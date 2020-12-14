@@ -1,0 +1,15 @@
+version: "3"
+services:
+ manager:
+  image: "postgres:latest"
+  env_file:
+   - config.py
+ flaskapp:
+  build:
+   context: "./"
+   dockerfile: "Dockerfile.dev"
+  image: "flaskapp:latest" 
+  ports:
+   - "5432:80"
+  depends_on:
+   - "manager"
